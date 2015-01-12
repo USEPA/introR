@@ -19,7 +19,7 @@ library("ggplot2")
 library("dplyr")
 ```
 
-In this third lesson we are going to start working on maninpulating and cleaning up our data frames.  We are spending some time on this because, in my experience, most data analysis and statistics classes seem to assume that 95% of the time spent working with data is on the analysis and interpretation of that analysis and little time is spent getting data ready to analyze.  However, in reality, I'd argue, the time spent is flipped with most time spent on cleaning up data and significantly less time on the analysis. We will just be scratching the surface of the many ways you can work with data in R.  We will show the basics of subsetting, merging, modifying, and sumarizing data and our examples will all use Hadley Wickham and Romain Francois' `dplyr`.  There are many ways to do this type of work in R, many of which are available from base R, but I heard from many (AED colleagues and Hadley himself!) focusing on one way to do this is best, so `dplyr` it is!
+In this third lesson we are going to start working on maninpulating and cleaning up our data frames.  We are spending some time on this because, in my experience, most data analysis and statistics classes seem to assume that 95% of the time spent working with data is on the analysis and interpretation of that analysis and little time is spent getting data ready to analyze.  However, in reality, I'd argue, the time spent is flipped with most time spent on cleaning up data and significantly less time on the analysis. We will just be scratching the surface of the many ways you can work with data in R.  We will show the basics of subsetting, merging, modifying, and sumarizing data and our examples will all use Hadley Wickham and Romain Francois' `dplyr` package.  There are many ways to do this type of work in R, many of which are available from base R, but I heard from many (AED colleagues and Hadley himself!) focusing on one way to do this is best, so `dplyr` it is!
 
 Before we jump into the lesson, quick links and lesson goals are:
 
@@ -28,7 +28,7 @@ Before we jump into the lesson, quick links and lesson goals are:
 - [Lesson 3 R Code](/introR/rmd_posts/2015-01-14-03-Clean.R): All the code from this post in an R Script.
 - [Exercise 1](#exercise-1): Subsetting the NLA data with `dplyr`
 - [Exercise 2](#exercise-2): Merge two NLA data files together.
-- [Exercise 2](#exercise-2): Using `dplyr` to modify and summarize the NLA.
+- [Exercise 3](#exercise-3): Using `dplyr` to modify and summarize the NLA.
 
 
 ##Lesson Goals
@@ -40,7 +40,7 @@ Before we jump into the lesson, quick links and lesson goals are:
 
 ##What is `dplyr`? 
 
-The package `dplyr` is a fairly new (2014) package that tries to provide easy tools for the most common data manipulation tasks.  It is built to work directly with data frames.  The thinking behind it was largely inspired by the package `plyr` which has been in use for some time but suffered from being slow in some cases.  `dplyr` address this by porting much of the computation to C++.  An additional feature is the ability to work with data stored directly in an external database.  The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query returned.  
+The package `dplyr` is a fairly new (2014) package that tries to provide easy tools for the most common data manipulation tasks.  It is built to work directly with data frames.  The thinking behind it was largely inspired by the package `plyr` which has been in use for some time but suffered from being slow in some cases.  `dplyr` addresses this by porting much of the computation to C++.  An additional feature is the ability to work with data stored directly in an external database.  The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query returned.  
 
 This addresses a common problem with R in that all operations are conducted in memory and thus the amount of data you can work with is limited by available memory.  The database connections essentially remove that limitation in that you can have a database of many 100s GB, conduct queries on it directly and pull back just what you need for analysis in R.  There is a lot of great info on `dplyr`.  If you have an interest, i'd encourage you to look more.  The vignettes are particulary good.
 
@@ -48,13 +48,13 @@ This addresses a common problem with R in that all operations are conducted in m
 - [CRAN page: vignettes here](http://cran.rstudio.com/web/packages/dplyr/)
 
 ##Subsetting in base R
-In base R you can use a indexing to select out columns and rows.  You will see this quite often in other peoples code, so I want to a least show it to you.  
+In base R you can use indexing to select out rows and columns.  You will see this quite often in other peoples' code, so I want to at least show it to you.  
 
 ```{r indexing_examp}
 #Create a vector
 x<-c(10:19)
 x
-#Postive indexing returns just the value in the ith place
+#Positive indexing returns just the value in the ith place
 x[7]
 #Negative indexing returns all values except the value in the ith place
 x[-3]
@@ -69,7 +69,7 @@ x[c(TRUE,FALSE)]
 x[x%%2==0]
 ```
 
-You can also index a data frame or select individual columns of a data frame.  Since a data frame has two dimensions, you need to specify an index for both the row and the column.  You can specify both and get a single value like `data_frame[row,column`],specify just the row and the get the whole row back like `data_frame[row,]` or get just the column with `data_frame[,column]`.   These examples show that.
+You can also index a data frame or select individual columns of a data frame.  Since a data frame has two dimensions, you need to specify an index for both the row and the column.  You can specify both and get a single value like `data_frame[row,column]`, specify just the row and the get the whole row back like `data_frame[row,]` or get just the column with `data_frame[,column]`.   These examples show that.
 
 ```{r data_frame_index}
 #Let's use one of the stock data frames in R, iris
@@ -135,7 +135,7 @@ virginica_iris<-filter(iris,Species=="virginica")
 head(virginica_iris)
 ```
 
-But what if I wanted to select and filter?  There are three ways to do this: use intermediate steps, nested functions, or pipes.  With the intermediate steps, you essentially create a temporary data frame and use that as input to the next function.  You can also nest functions (i.e. one function inside of another).  This is handy, but can be difficult to read if too many functions are nested as the process from inside out.  The last option, pipes, are a fairly recent addition to R.  Pipes in the unix/linux world are not new and allow you to chain commands together where the output of one command is the input to the next.  This provides a more natural way to read the commands in that they are executed in the way you conceptualize it and make the interpretation of the code a bit easier.  Pipes in R look like `%>%` and are made available via th `magrittr` package, which is installed as part of `dplyr`  Let's try all three with the same analysis: selecting out a subset of columns but for only a single species.
+But what if I wanted to select and filter?  There are three ways to do this: use intermediate steps, nested functions, or pipes.  With the intermediate steps, you essentially create a temporary data frame and use that as input to the next function.  You can also nest functions (i.e. one function inside of another).  This is handy, but can be difficult to read if too many functions are nested as the process from inside out.  The last option, pipes, are a fairly recent addition to R.  Pipes in the unix/linux world are not new and allow you to chain commands together where the output of one command is the input to the next.  This provides a more natural way to read the commands in that they are executed in the way you conceptualize it and make the interpretation of the code a bit easier.  Pipes in R look like `%>%` and are made available via th `magrittr` package, which is installed as part of `dplyr`.  Let's try all three with the same analysis: selecting out a subset of columns but for only a single species.
 
 ```{r combine_commands}
 #Intermediate data frames
@@ -158,19 +158,19 @@ head(dplyr_big_iris_pipe)
 ```
 
 ##Exercise 1
-This exercise is going to focus on using what we just covered on `dplyr` to start to clean up the National Lakes Assessment data files.  Remember to use the stickies: green when your done, red if you have a problem.
+This exercise is going to focus on using what we just covered on `dplyr` to start to clean up the National Lakes Assessment data files.  Remember to use the stickies: green when you're done, red if you have a problem.
 
 1. If it isn't already open, make sure you have the script we created, "nla_analysis.R" opened up.
 2. Start a new section of code in this script by simply putting in a line or two of comments indicating what it is this set of code does.
 3. Our goal for this is to create two new data frames that represent a subset of the observations as well as a subset of the data. 
 4. First, from the  `nla_sites` data frame we want a new data frame that has only the following columns: SITE_ID, VISIT_NO, SITE_TYPE, LON_DD, LAT_DD, STATE_NAME, WSA_ECO9, NUT_REG, NUTREG_NAME, LAKE_ORIGIN, and RT_NLA.  Name the new data frame `nla_sites_subset`.  Think `select()`
 5. Next, lets subset the water quality data from `nla_wq`.  The columns we want for this are: SITE_ID, VISIT_NO, SITE_TYPE, TURB, NTL, PTL, CHLA, and SECMEAN. 
-6. Last thing we are going to need to do is get a subset of the observations from `nla_wq_subset` and `nla_sites_subset`.  We need only the lakes that with VISIT_NO equal to 1 and SITE_TYPE equal to "PROB_Lake".  Keep the same name, `nla_wq_subset` and `nla_sites_subset`, for these data frames.
+6. Last thing we are going to need to do is get a subset of the observations from `nla_wq_subset` and `nla_sites_subset`.  We need only the lakes with VISIT_NO equal to 1 and SITE_TYPE equal to "PROB_Lake".  Keep the same name, `nla_wq_subset` and `nla_sites_subset`, for these data frames.
 
 ##Merging Data
 Joining data in `dplyr` is accomplished via the various `x_join()` commands (e.g., `inner_join`, `left_join`, `anti_join`, etc).  These are very SQL-esque so if you speak SQL (I am far from fluent!) then these will be pretty easy for you.  If not then they aren't immediately intutive.  For our purposes, the base functions `rbind()` and `merge()` are more than adequate.  
 
-We are going to talk about several different ways to do this.  First, lets add some new rows to a data frame.  This is very handy as you might have data collected and entered at one time, and then additional observations made later that need to be added.  So with `rbind()` we can stack two data frames with the same columns to store more observations.  
+We are going to talk about several different ways to do this.  First, let's add some new rows to a data frame.  This is very handy as you might have data collected and entered at one time, and then additional observations made later that need to be added.  So with `rbind()` we can stack two data frames with the same columns to store more observations.  
 
 ```{r rbind_examp}
 #Let's first create a new small example data.frame
@@ -203,7 +203,7 @@ rbind_df_merge_allx
 In this exercise we are going to practice merging our NLA data.  You will remember that we have two datasets, one on water quality and one on site information.  We selected some info out of the water quality data that we didn't select out of the site info so we have two data frames, with differing numbers of rows and unknown order.  Use your stickies!
 
 1. This is the only task we have for this exercise.  Add to your script a line (or more if you need it) to create a new data frame, `nla_data`, that is a merge of `nla_sites_subset` and `nla_wq_subset`, but with all lines in `nla_wq_subset` preserved in the output.  The column to merge on is "SITE_ID"
-2. This data frame will have some `NA` values.  For the purposes of these lessons, it is going to better to remove these.  Add another line to your code and create a data frame that replaces `nla_data` that has had all of the `NA` values removed.
+2. This data frame will have some `NA` values.  For the purposes of these lessons, it is better to remove these.  Add another line to your code and create a data frame that replaces `nla_data` that has had all of the `NA` values removed.
 2. If that goes quickly, feel free to explore `rbind()` some.
 
 ##Modify and Summarize
@@ -234,7 +234,7 @@ head(arrange(mtcars,desc(mpg)))
 head(arrange(mtcars,desc(cyl),desc(mpg)))
 ```
 
-Now `slice()` which accomplishes what we did with the numeric indices before.  Remembering back to that, we'd could grab rows of data frame with something like `x[1:3,]`.  
+Now `slice()` which accomplishes what we did with the numeric indices before.  Remembering back to that, we could grab rows of the data frame with something like `x[1:3,]`.  
 
 ```{r slice_example}
 #grab rows 3 through 10

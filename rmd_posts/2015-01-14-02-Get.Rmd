@@ -34,12 +34,12 @@ Being thoughtful about workflow from the beginning of a project is something tha
 4. Comment ruthlessly.
 5. Don't save .RData files or workspace history.  The script should recreate whatever you need.
 
-This, of course, is not the only way you can strucutre a workflow, but I think it should be a good starting point for this workshop and one you can adapt to you own work afterwards.  And to provide a little motiviation, the more you utilize scripts, the more reproducible you work is, the more likely you will be able to recall what you did 3 months from now (your future self will thank you), and the easier it will be to transition your work from scripts to functions and, ultimately, to R packages.
+This, of course, is not the only way you can structure a workflow, but I think it should be a good starting point for this workshop and one you can adapt to your own work afterwards.  And to provide a little motivation, the more you utilize scripts, the more reproducible your work is, the more likely you will be able to recall what you did 3 months from now (your future self will thank you), and the easier it will be to transition your work from scripts to functions and, ultimately, to R packages.
 
 ###Working in the Console
-As I mentioned above, the conosle and using R interactively is very powerful.  We will do this quite a bit.  Let's spend a little time playing around in the console and learn a few new functions.
+As I mentioned above, the console and using R interactively is very powerful.  We will do this quite a bit.  Let's spend a little time playing around in the console and learn a few new functions.
 
-R can be used as a caculator and a way to compare values.  Some examples of the basic operators:
+R can be used as a calculator and a way to compare values.  Some examples of the basic operators:
 
 ```{r operators_consoloe}
 #A really powerful calculator!
@@ -80,7 +80,7 @@ a2
 
 Now that we have a little experience working in the console and creating objects with `<-`, we might want to be able to do some additional things to navigate around, look at these objects etc.
 
-Some functions that you might fund useful for working in with your R workspace:
+Some functions that you might fund useful for working in your R workspace:
 
 ```{r useful_functions_workspace}
 #List all objects in current workspace
@@ -99,7 +99,7 @@ save(a,y,file="lesson2_ay.RData")
 
 This is probably a good spot to bring up quotes vs no quotes around arguments in a function.  This is a very common stumbling block.  The general rule is that no quotes are used only when referring to an object that currently exists.  Quotes are used in all other cases.  For instance in `save(a,y,file="lesson2_ay.RData")` the objects `a` and `y` are not quoted becuase they are objects in the workspace.  `file` is an argument of save and arguments are never quoted.  We quote the name of the file "lesson2_ay.RData" becuase it is not an R object but the name of a file to be created.  
 
-You will likely still have some issues with this.  My recomendation is to think about if it is an object in your R workspace or not.  If so, no quotes! This isn't foolproof, but works well most of the time.
+You will likely still have some issues with this.  My recommendation is to think about if it is an object in your R workspace or not.  If so, no quotes! This isn't foolproof, but works well most of the time.
 
 Next thing you might want to do is navigate around your files and directories.
 
@@ -132,7 +132,7 @@ For this first excercise I am actually going to ignore my workflow advice from a
 
 So the last question in exercise 1 was a bit of a contrived way to segue into data types and structures.  So with that last bit, what did we ask R to do?  Why did it respond the way it did?  
 
-In short it has a lot to do with data types.  Let's learn some more
+In short it has a lot to do with data types.  Let's learn some more.
 
 ##Data types and data structures in R
 *Borrowed liberally from Jenny Bryan's [course materials on r](http://www.stat.ubc.ca/~jenny/STAT545A/quick-index.html) and Karthik Ram's [material from the Canberra Software Carpentry R Bootcamp](https://github.com/swcarpentry/2013-10-09-canberra).  Anything good is because of Jenny and Karthik.  Mistakes are all mine.*
@@ -156,7 +156,7 @@ In this workshop we will deal almost exclusively with three (and these are, in m
 ### NA, Inf, and NaN
 There are values that you will run across on ocassion that aren't really data types but are important to know about.  
 
-`NA` is R's value for missing data.  You will see this often and need to figure out how to deal with them in your analysis.  A few built in functions are useful for dealing with `NA`.  We will show there usage a bit later.
+`NA` is R's value for missing data.  You will see this often and need to figure out how to deal with them in your analysis.  A few built in functions are useful for dealing with `NA`.  We will show their usage a bit later.
 
 ```{r na_examples, eval=FALSE}
 na.omit()#na.omit - removes them
@@ -168,20 +168,17 @@ is.na()#Will tell you if a value is NA
 
 ```{r}
 1/0
-# [1] Inf
 1/Inf
-# [1] 0
 ```
 
 `NaN` means Not a number. it's an undefined value.
 
 ```{r}
 0/0
-NaN.
 ```
 
 ###Data Structures
-The next set of information relates to the many data strucutres in R.  
+The next set of information relates to the many data structures in R.  
 
 The data structures in base R include:
 
@@ -192,7 +189,7 @@ The data structures in base R include:
 - factors
 - tables
 
-Our efforts will focus on vectors and data frames.  We will discuss just the basics of lists and factors.  I will leave it to your curiousity to explore the matrix and table data structures
+Our efforts will focus on vectors and data frames.  We will discuss just the basics of lists and factors.  I will leave it to your curiousity to explore the matrix and table data structures.
 
 ### Vectors
 A vector is the most common and basic data structure in `R` and is pretty much the workhorse of R. 
@@ -243,7 +240,7 @@ laugh<-rep("Ha", 100)
 laugh
 ```
 
-Lastly, R can operate directly on vectors.  This means we can use use our arithmetic functions on vectors and also many functions can deal with vectors directly.  The result of this another vector, equal to the length of the longest one.
+Lastly, R can operate directly on vectors.  This means we can use use our arithmetic functions on vectors and also many functions can deal with vectors directly.  The result of this is another vector, equal to the length of the longest one.
 
 ```{r vectorized_examp}
 #A numeric example
@@ -270,7 +267,7 @@ first_last
 
 Data frames are the data structure you will most often use when doing data analysis.  They are the most spreadsheet like data structure in R, but unlike spreadsheets there are some rules that must be followed. This is a good thing!
 
-Data frames are made up of columns and rows.  Each column is a vector and those vectors must be of the same length.  Essentially, anything that can be saved in a `.csv` file can be read in as a data frame.  Data frames have several attributes.  The ones you will interact with the most are column names, row names, dimension.  
+Data frames are made up of rows and columns.  Each column is a vector and those vectors must be of the same length.  Essentially, anything that can be saved in a `.csv` file can be read in as a data frame.  Data frames have several attributes.  The ones you will interact with the most are row names, column names, and dimension.  
 
 So one way to create a data frame is from some vectors and the `data.frame()` command:
 
@@ -315,17 +312,18 @@ Factors may be ordered (e.g., low, medium, high) or unordered (e.g. male, female
 Factors can be created with `factor()`. Input is a character vector.
 
 ```{r factor_examples}
-#An unorderd factor
+#An unordered factor
 yn <- factor(c("yes", "no", "no", "yes", "yes"))
 yn
 
 #An ordered factor
 lmh <- factor (c("high","high","low","medium","low","medium","high"),levels=c("low","medium","high"),ordered=TRUE )
+lmh
 ```
 
 ### List
 
-Lists are actually a special type of vector, but it is probably best to think of them as their own thing.  Lists can contain multiple items, of mulitple types, and of multiple structures.  They are very versatile and often used inside functions or as an output of functions.  
+Lists are actually a special type of vector, but it is probably best to think of them as their own thing.  Lists can contain multiple items, of multiple types, and of multiple structures.  They are very versatile and often used inside functions or as an output of functions.  
 
 Also, lists don't print out like a vector. They print a new line for each element.
 
@@ -341,10 +339,9 @@ If you want to learn more about lists or any other data structure, [Hadley Wickh
 ##Reading data into R
 All of the examples so far have relied on entering data directly into the console or a script.  That mode is certainly useful for demonstrating data structures, but would be a nightmare if you were dealing with a real dataset.  What we generally want to do is read in data from a file or from a database that resides on your local machine or on the web.  There are a gazillion ways that this can be accomplished, right now, we are going to work with one, `read.csv()`.  If there is time later, we may talk about some others.
 
-`read.csv()` is a specialized version of `read.table()` that focuses on, big surprise here, `.csv` files.  This command assumes a header row with column names and that the delimiter is a comma.  The expected  
-no data value is `NA` and by default, strings are converted to factors (this can trip people up).
+`read.csv()` is a specialized version of `read.table()` that focuses on, big surprise here, `.csv` files.  This command assumes a header row with column names and that the delimiter is a comma.  The expected no data value is `NA` and by default, strings are converted to factors (this can trip people up).
 
-Source files for `read.csv()` can either be on a local hard drive or, and this is pretty cool, on the web.  We will be using the later for our examples and exercises.  If you had a local file it would be accessed like `mydf <- read.csv("C:/path/to/local/file.csv")`.  As an aside, paths and use of forward vs back slash is important. R is looking for forward slashes ("/"), or unix-like paths.  You can use these in place of the back slash and be fine.  You can use a back slash but it needs to be a double back slash ("\\").  This is becuase the single backslash in an escape character that is used to indicate things like newlines or tabs. Doesn't really matter which one you use, I would just select one and be consistent.
+Source files for `read.csv()` can either be on a local hard drive or, and this is pretty cool, on the web.  We will be using the latter for our examples and exercises.  If you had a local file it would be accessed like `mydf <- read.csv("C:/path/to/local/file.csv")`.  As an aside, paths and use of forward vs back slash is important. R is looking for forward slashes ("/"), or unix-like paths.  You can use these in place of the back slash and be fine.  You can use a back slash but it needs to be a double back slash ("\\\\").  This is becuase the single backslash in an escape character that is used to indicate things like newlines or tabs. Doesn't really matter which one you use, I would just select one and be consistent.
 
 For now we are going to be focusing on grabbing data from a website, which just requires using an URL in the `read.csv()` function.
 
@@ -359,7 +356,7 @@ dim(web_df)
 summary(web_df)
 ```
 
-It is possible to pull data in directly from an Excel file as well.  These require external packages and also external libraries.  The one that * should * work with the installs on the EZ Tech machines is `gdata`.  We won't be working with this extensively in the workshop, but I will show an example here.
+It is possible to pull data in directly from an Excel file as well.  These require external packages and also external libraries, including Strawberry Perl.  The one that * should * work with the installs on the EZ Tech machines is `gdata`.  We won't be working with this extensively in the workshop, but I will show an example here.
 
 ```{r gdata_examp}
 #Make sure gdata is installed

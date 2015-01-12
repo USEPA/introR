@@ -8,7 +8,7 @@ The workshop is designed around my own idea of what a common data analysis workf
 
 I hope this workshop to be more hands-on exercises and less show and tell.  After the workshop you won't be an expert but should have the foundation for getting started on your own data analysis work in R and will know where and how to get help. 
 
-This outline and way of thinking about teaching R is greatly influenced by both [Software Carpentry](software-carpentry.org) and [Data Carpentry](http://datacarpentry.org/).  I have borrowed a great deal of my inspiration from both places.
+This outline and way of thinking about teaching R is greatly influenced by both [Software Carpentry](http://software-carpentry.org) and [Data Carpentry](http://datacarpentry.org/).  I have borrowed a great deal of my inspiration from both places.
 
 For each of the lessons there is a blog post that describes what we are doing, provides some examples and also provides some hands-on exercises.  I have written these as blog posts for use after the workshop.  Additionally, all of the code for each lesson is available as a stand alone R script.  During the workshop we will work mostly from the script.  
 
@@ -32,7 +32,7 @@ For each of the lessons there is a blog post that describes what we are doing, p
 
 #### Lunch (12:00 pm - 1:00 pm)
 
-### 03 - Clean (12:00 pm - 12:00 pm)
+### 03 - Clean (12:00 pm - 2:45 pm)
 - `dplyr` 
 - Subset
 - Reshape
@@ -51,7 +51,7 @@ For each of the lessons there is a blog post that describes what we are doing, p
 ### 05 - Analyze: Base (8:30 am - 9:30 am)
 - Base statistics
 
-### 06 - Analyze: Contributed Package (9:30 am - 10:30 am)
+### 06 - Analyze: Contributed Package (9:30 am - 10:45 am)
 - Contributed Packages - Example with Random Forest
 
 #### Break (10:45 am - 11:00 am)

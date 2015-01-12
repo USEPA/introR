@@ -31,13 +31,13 @@ R is an open source language and environment for data analysis, statistics, and 
 
 The primary reason R is widely used is that it is free, has a large and vibrant community, it is easily extensible, and back to that question, yes you can do that in R!  More to the point, in the environmental sciences R is able to handle any data management, analysis or visualization task that you would need to accomplish and it has capabilities to provide a fully reproducible analysis. 
 
-Lastly, R has almost become the standard for any data analysis or visualization task.  A great site [r4stats.com](http://r4stats.com) has an [article](http://r4stats.com/articles/popularity/) on data analysis software popularity that is kept update on the relative popularity of different languages.  One striking figure is the comparison of links to the main pages of the different languages:
+Lastly, R has almost become the standard for any data analysis or visualization task.  A great site [r4stats.com](http://r4stats.com) has an [article](http://r4stats.com/articles/popularity/) on data analysis software popularity that is kept up to date on the relative popularity of different languages.  One striking figure is the comparison of links to the main pages of the different languages:
 
 [![r4stats.com web site link graph](http://r4stats.files.wordpress.com/2012/04/fig_8_websitelinks.png?w=640&h=689)](http://r4stats.com/articles/popularity/)
 
 <caption align="bottom">source: r4stats.com - The Popularity of Data Analysis Software </caption>
 
-If read this article you certainly get the sense that R is one of the top languages and trends all favor its continued growth while other popular software (SAS, SPSS, etc.) are seeing decline.
+If you read this article you certainly get the sense that R is one of the top languages and trends all favor its continued growth while other popular software (SAS, SPSS, etc.) are seeing decline.
 
 ##Getting R and RStudio going
 Over the last several years, RStudio has become a very popular IDE (integrated development environment) for R.  In addition to interacting with the R Console, RStudio has many extras built in including version control integration, package building, reproducible research, de-bugging, and built-in text editor with smart highlighting and code completion.  This is the environment we will be using for the two days and should set you up for continued learning with R.
@@ -52,14 +52,14 @@ This exercise will make sure R and RStudio are working and that you can get arou
 
 2. Take a few minutes to look around RStudio.  Find the Console Pane. Find Global and Project Options (hint: look in Tools).  Look at the Environment, History Pane.  Look at the Files, Plots, Packages ... pane.
 
-3. Create a new project.  Name is "gedr_workshop".  We will use this for the rest of the workshop.
+3. Create a new project.  Name it "gedr_workshop".  We will use this for the rest of the workshop.
 
 4. Create a new "R Script"" in the Source Pane, save that file into your newly created project and name it "lesson1.R". 
 
 5. Download [Lesson 1 R Code](/introR/rmd_posts/2015-01-14-01-Introduction.R) and save it to your project.
 
 ##Using functions
-R is built off of functions and most of everything you do will use a function.
+R is built off of functions and most of everything you do will uses a function.
 
 The basic syntax of function follows the form: `function_name(arg1, arg2, ...)`.  With the base install, you will gain access to many.  For instance:
 
@@ -85,7 +85,7 @@ The base install of R is quite powerful, but you will soon have a need or desire
 One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.
 
 ###Installing packages
-When a packages gets installed, that means the source (or packaged binary for Windows) is downloaded and put into your library.  A default library location is set for you so no need to worry about that.  In fact on Windows most of this is pretty automatic.  Let's give it a shot.
+When a package gets installed, that means the source (or packaged binary for Windows) is downloaded and put into your library.  A default library location is set for you so no need to worry about that.  In fact on Windows most of this is pretty automatic.  Let's give it a shot.
 
 
 ```{r install_package, cache=TRUE}
@@ -105,7 +105,7 @@ One source of confusion that many have is when they cannot access a package that
 library("ggplot2")
 library("dplyr")
 
-#You can also access functions in a library by using package::function
+#You can also access functions without loading by using package::function
 randomForest::randomForest
 
 ```
@@ -122,7 +122,7 @@ installed.packages()
 #What packages are available?
 available.packages()
 
-#Update
+#Update, may take a while if you have lots of packages
 update.packages()
 ```
 
@@ -148,12 +148,12 @@ apropos("print") #Returns all available functions with "print" in the name
 In addition to help from within R itself, CRAN and the R-Project have many resources available for support.  Two of the most notable are the mailing lists and the [task views](http://cran.r-project.org/web/views/).
 
 - [R Help Mailing List](https://stat.ethz.ch/mailman/listinfo/r-help): The main mailing list for R help.  Can be a bit daunting and some (although not most) senior folks can be, um, curmudgeonly...
-- [R-sig-ecology](https://stat.ethz.ch/mailman/listinfo/r-sig-ecology): A special interest group for use of R in ecology.  Less daunting the the main help with participation form some big names in ecological modelling and statistics (e.g., Ben Bolker, Gavin Simpson, and Phil Dixon).  One of the moderators is great, the other is a bit of a jerk (it's me).
+- [R-sig-ecology](https://stat.ethz.ch/mailman/listinfo/r-sig-ecology): A special interest group for use of R in ecology.  Less daunting the the main help with participation from some big names in ecological modelling and statistics (e.g., Ben Bolker, Gavin Simpson, and Phil Dixon).  One of the moderators is great, the other is a bit of a jerk (it's me).
 - [Environmetrics Task View](http://cran.r-project.org/web/views/Environmetrics.html): Task views are great in that they provide an annotated list of packages relevant to a particular field.  This one is maintained by Gavin Simpson and has great info on packages relevant to much of the work at EPA.
 - [Spatial Analysis Task View](http://cran.r-project.org/web/views/Spatial.html): One I use a lot that lists all the relevant packages for spatial analysis, GIS, and Remote Sensing in R. 
 
 ###Google and StackOverflow
-While the resources already mentioned are useful, often the quickest way is to just turn to Google.  However, a search for "R" is a bit challenging.  A few ways around this.  Google works great if you search of a given package.  You can search for mailing lists directly (i.e. "R-sig-geo").  An R specific search tool, [RSeek.org](http://www.rseek.org/), has been created to facilitate this.  
+While the resources already mentioned are useful, often the quickest way is to just turn to Google.  However, a search for "R" is a bit challenging.  A few ways around this.  Google works great if you search for a given package.  You can search for mailing lists directly (i.e. "R-sig-geo").  An R specific search tool, [RSeek.org](http://www.rseek.org/), has been created to facilitate this.  
 
 One specific resource that I use quite a bit is [StackOverflow with the 'r' tag](http://stackoverflow.com/questions/tagged/r).  StackOverflow is a discussion forum for all things related to programming.  You can then use this tag and the search functions in StackOverflow and find answers to almost anything you can think of.
 
@@ -174,8 +174,8 @@ For this second exercise we are going to get used to using some basic functions,
 1. If it is not already open, open the "lesson1.R" file you created in Exercise 1. Enter your commands into this script.
 2. Use the `print` function to print something to the screen.
 3. Combine `mean` and `rnorm` to return the mean value of a set of random numbers.
-4. Open up a [task view](http://cran.r-project.org/web/views/) of your choosing.  Select a package and install it. 
-5. Load the library.
+4. Open up a [task view](http://cran.r-project.org/web/views/) of your choosing.  Identify a package and install it. 
+5. Load the package.
 6. Open the help for the package.
 7. Save all these functions inside your "lesson1.R" script.  Run the script using the "Run" button at the top right of the editor.
 
