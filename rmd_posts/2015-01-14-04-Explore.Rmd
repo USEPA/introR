@@ -16,7 +16,7 @@ Our next three lessons (Explore, Analyze, and Visualize) don't actually split ne
 - Create a variety of simple exploratory plots
 
 ##Summary Statistics
-There are a number of ways to get at the basic summaries of a data frame in R.  The easiest is going to be to use `summary()` which for data frames will return a summary of each column.  For numeric columns it gives quantiles, median, etc. and for factor a frequency of the terms.  Let's go back to iris and take a look.
+There are a number of ways to get at the basic summaries of a data frame in R.  The easiest is to use `summary()` which for data frames will return a summary of each column.  For numeric columns it gives quantiles, median, etc. and for factor a frequency of the terms.  Let's go back to iris and take a look.
 
 ```{r summary_data_example}
 summary(iris)
@@ -58,25 +58,24 @@ OPTIONAL: Next lets continue to add to our script.  This time we will be combini
 
 2. Create a separate vector for each of the water quality variables.  The vector should be of length 7.
 3. Combine those vectors into a data frame.
-4. Make sure you column names AND row names make sense.
+4. Make sure your column names AND row names make sense.
 
 ##Basic Visualization
 Exploratory data analysis tends to be a little bit about stats and a lot about visualization.  Later we are going to go into more detail on `ggplot2` which is becoming the gold standard of viz in R, but for now we will look at some of the simple, yet very useful, plots that come with base R.  I find these to be great ways to quickly explore data.  
 
-The workshorse function for plotting data in R is `plot()`.  With this one command you can create almost any plot you can conceive of, but for this workshop we are just going to look at the very basics of the function.  The most common way to use `plot()` is for scatterplots.  Let's look at the `mtcars` data.
+The workhorse function for plotting data in R is `plot()`.  With this one command you can create almost any plot you can conceive of, but for this workshop we are just going to look at the very basics of the function.  The most common way to use `plot()` is for scatterplots.  Let's look at the `mtcars` data.
 
 ```{r plot_examp}
 plot(mtcars$hp,mtcars$qsec)
 ```
 
-Hey, a plot!  Not bad.  Let's customize a bit becuase those axis labels aren't terribly useful and we need a title. For that we can use the `main`, `xlab`, and `ylab` arguments.
+Hey, a plot!  Not bad.  Let's customize a bit because those axis labels aren't terribly useful and we need a title. For that we can use the `main`, `xlab`, and `ylab` arguments.
 
 ```{r plot_examp_2}
-plot(mtcars$hp,mtcars$qsec,main="Changes in Quartermile time as function of horsepower",
-     xlab="Total Horsepower",ylab="Quartermile Time (secs)")
+plot(mtcars$hp,mtcars$qsec,main="Changes in Quartermile time as function of horsepower",xlab="Total Horsepower",ylab="Quartermile Time (secs)")
 ```
 
-Not sure if this will apply to everyone, but I use scatterplots ALL the time.  So, for me I could almost (not really) stop here.  But lets move on.  Let's say we want to look at more than just one relationship at a time with a pairs plot.  Again, `plot()` is our friend.  If you pass plot a data frame instead of an x and y vector it will plot all possible pairs.  Be careful though, as too many columns will produce an unintelligble plot.  Let's go back to `iris`.
+Not sure if this will apply to everyone, but I use scatterplots ALL the time.  So, for me I could almost (not really) stop here.  But lets move on.  Let's say we want to look at more than just one relationship at a time with a pairs plot.  Again, `plot()` is our friend.  If you pass a data frame to plot instead of an x and y vector it will plot all possible pairs.  Be careful though, as too many columns will produce an unintelligble plot.  Let's go back to `iris`.
 
 ```{r pairs_examp}
 plot(iris, main="Iris Pairs Plot")
@@ -103,7 +102,7 @@ plot(iris$Petal.Width,iris$Petal.Length, main="Petal Dimensions")
 abline(lm(Petal.Length~Petal.Width,data=iris))
 ```
 
-So, we detoured a bit.  Let's get back to a few more examples of exploratory plots.  We will look at boxplots, historgrams, and cumulative distribution functions then call it quits on the exploratory analyis (and the first day, whew!)
+So, we detoured a bit.  Let's get back to a few more examples of exploratory plots.  We will look at boxplots, histograms, and cumulative distribution functions then call it quits on the exploratory analyis (and the first day, whew!)
 
 Two great ways to use boxplots are straight up and then by groups in a factor. For this we will use `boxplot()` and in this case it is looking for a vector as input. Sticking with `iris`:
 
@@ -117,7 +116,7 @@ As plots go, well, um, not great.  Let's try it with a bit more info and create 
 boxplot(iris$Petal.Length~iris$Species, main="Boxplot of Petal Length by Species",ylab="Length(cm)")
 ```
 
-Lastly, let's look at two other ways to plot our distrubutions.  First, histograms.
+Lastly, let's look at two other ways to plot our distributions.  First, histograms.
 
 ```{r base_hist_examp}
 hist(iris$Sepal.Length)

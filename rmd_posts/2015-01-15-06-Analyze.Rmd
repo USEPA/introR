@@ -38,7 +38,7 @@ The second section will run through a quick example of using a package, `randomF
 - Understand how to add statistical functionality to R via packages
 - See some of the best ways to learn a new package
 
-Random forests were developed by Leo Breiman at UC-Berkely ([Breiman 2001](http://dx.doi.org/10.1023/A:1010933404324)).  At their simplest, a random forest is a collection (or ensemble) of classification (or regression) trees.  Each tree is developed based on a resampling of both the data and variables.  They have been shown to have superior predictive perfomance as well as to be robust to violation of the standard suite of assumptions that often plauge other approaches.  In my opinion, if you want to learn one machine learning approach, this is it.  If you want to read more, a few good references are:
+Random forests were developed by Leo Breiman at UC-Berkely ([Breiman 2001](http://dx.doi.org/10.1023/A:1010933404324)).  At their simplest, a random forest is a collection (or ensemble) of classification (or regression) trees.  Each tree is developed based on a resampling of both the data and variables.  They have been shown to have superior predictive perfomance as well as to be robust to violation of the standard suite of assumptions that often plague other approaches.  In my opinion, if you want to learn one machine learning approach, this is it.  If you want to read more, a few good references are:
 
 - [Cutler et. al. (2007):Random forests for classification in ecology](http://dx.doi.org/10.1890/07-0539.1)
 - [Fern´andez-Delgado et al. 2014: Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?](http://jmlr.org/papers/volume15/delgado14a/delgado14a.pdf) (HT:[Simply Statistics](http://simplystatistics.org/2014/12/17/a-non-comprehensive-list-of-awesome-things-other-people-did-in-2014/))
@@ -59,7 +59,7 @@ library("randomForest")
 help(package="randomForest")
 ```
 
-There are quite a few function included with this package, but the one we are most interested in is the workhorse `randomForest()` function.  For our examples we will look at classification trees.  The bare minimum we need for this to work are just our independent (x) and dependent variables (y).  Let's see if we can predict iris species from the morphology measurements...
+There are quite a few functions included with this package, but the one we are most interested in is the workhorse `randomForest()` function.  For our examples we will look at classification trees.  The bare minimum we need for this to work are just our independent (x) and dependent variables (y).  Let's see if we can predict iris species from the morphology measurements...
 
 ```{r rf_example}
 rf_x<-select(iris,Petal.Width, Petal.Length, Sepal.Width, Sepal.Length)
@@ -71,7 +71,7 @@ iris_rf
 
 Can we predict species, well, I'd say so!  
 
-We can also call `randomForest()` using a formula a data frame like,
+We can also call `randomForest()` using a formula for a data frame like,
 
 ```{r rf_form_examp}
 iris_rf2<-randomForest(Species~.,data=iris)
@@ -99,8 +99,8 @@ For the basics, that is it!  Let's try it now on the NLA data.
 ##Exercise 1
 For this exercise we are going to implement random forest and try to predict the NLA reference class from the water quality measurements.
 
-1. Add a new secion to the script
-2. Build your model to predict RT_NLA.  You may specify the model however makes the most sense
+1. Add a new section to the script
+2. Build your model to predict RT_NLA.  You may specify the model however makes the most sense.
 3. Print to the screen your result, plot the error and variable importance. When finished put a green sticky up and we will come around to check.
 
 ##Learning a New Package

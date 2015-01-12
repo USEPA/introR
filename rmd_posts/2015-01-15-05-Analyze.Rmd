@@ -29,12 +29,12 @@ The focus of this workshop hasn't really been statistics, its been more about R,
 - Get a taste of wide array of analyses in base R
 
 ##Base statistics
-The capabilities that come out of the box with R and actually quite good and used to cost you quite a bit to get access to.  Now it all comes for free!  Some of the things you can do with R without any additional packages inlcude, logistic regression (and all manner of generalized linear models), correlation, principle components analysis, chi-squared tests, clustering, loess, ANOVA, MANOVA, ...  In short, we can do a lot without moving of out base r and `stats`.
+The capabilities that come out of the box with R are actually quite good and used to cost you quite a bit to get access to.  Now it all comes for free!  Some of the things you can do with R without any additional packages include: logistic regression (and all manner of generalized linear models), correlation, principle components analysis, chi-squared tests, clustering, loess, ANOVA, MANOVA, ...  In short, we can do a lot without moving out of base r and `stats`.
 
 We will talk about a few analyses just to show the tip of the iceberg of what is available.
 
 ### t-tests
-A t-test is done simply with `t.test()` and you control the specifcs (paired, two-sided, etc.) with options.  For the simple case of comparing the difference of two means we can use all of the defaults:
+A t-test is done simply with `t.test()` and you control the specifics (paired, two-sided, etc.) with options.  For the simple case of comparing the difference of two means we can use all of the defaults:
 
 ```{r ttest_examp }
 x<-rnorm(30,mean=3,sd=2)
@@ -47,21 +47,21 @@ xy_tt
 
 ```{r ttest_formula_examp}
 #Lets pick another dataset, ToothGrowth.
-#Looking at diff in tooth lenth by groups specified in supp
+#Looking at diff in tooth length by groups specified in supp
 rbind(head(ToothGrowth),tail(ToothGrowth))
 t.test(ToothGrowth$len~ToothGrowth$supp)
 ```
 There's a lot more you can do with `t.test()`, but you'll have to rely on `?t.test` for more info.
 
 ### Correlation
-Next lets take a look at correlations.  Little inspiration is striking, so `iris` it is.
+Next let's take a look at correlations.  Little inspiration is striking, so `iris` it is.
 
 ```{r corr_examp,message=FALSE,warning=FALSE}
 #A simple correlation
 cor(iris$Petal.Width,iris$Petal.Length)
 #And a test of that correlation
 cor.test(iris$Petal.Width,iris$Petal.Length)
-#A data frame returns a correlation matrix
+#A data frame as input returns a correlation matrix
 cor(iris)
 #Oops, non-numeric data.  Lets use dplyr to get what we want and pipe to cor
 library(dplyr)
@@ -69,7 +69,7 @@ select(iris,-Species) %>%
   cor()
 ```
 
-If you look at the help for `cor()`, you'll two main optional arguments.  First is the `use` argument which allows you to use the entire dataset or select complete cases which is useful when you have `NA` values.  There are several options.  Also, the defualt correlation method is for Pearson's.  If you would like to non-parametric correlations (e.g. rank), you specify that here.
+If you look at the help for `cor()`, you'll see two main optional arguments.  First is the `use` argument which allows you to use the entire dataset or select complete cases which is useful when you have `NA` values.  There are several options.  Also, the default correlation method is for Pearson's.  If you would like to use non-parametric correlations (e.g. rank), you specify that here.
 
 ### Linear Regression
 Next let's take a look at linear regression.  One of the common ways of accessing linear regressions is with `lm()`.  We have already seen the formula object so there isn't too much that is new here.  Some of the options though are new and useful.  Let's take a look:
@@ -84,7 +84,7 @@ lm_aq2<-lm(Ozone~Temp+Wind+Solar.R,data=airquality)
 summary(lm_aq2)
 ```
 
-All of your standard modelling approaches (and then some) are avaialble in R including typical variable selection techniques (e.g. stepwise with AIC), logistic regression. which is implemented with the rest of the generalized linear models in `glm()`.  More involved or newer approaches will be implemented (most likely) with additional packages.
+All of your standard modelling approaches (and then some) are available in R including typical variable selection techniques (e.g. stepwise with AIC) and logistic regression which is implemented with the rest of the generalized linear models in `glm()`.  More involved or newer approaches will be implemented (most likely) with additional packages.
 
 ```{r Exercise1, echo=FALSE}
 ```

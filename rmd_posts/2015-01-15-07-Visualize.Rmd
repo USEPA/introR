@@ -19,7 +19,7 @@ library("ggplot2")
 library("dplyr")
 ```
 
-One of the frequently touted strong points of R is data visualization.  We saw some of that with our use of base graphics, but those plots were, frankly, a bit pedestrian.  More and more though, users are moving away from base graphics and using the`ggplot2` package.  I would even go as far to say that it is almost become the default plotting mechanism in R.  This whole lesson we will focus on creating, modifying, and save plots with `ggplot2`. And full disclosure here, I am relatively new to `ggplot2` and have been using it to create plots for about a year, thus I likely don't have all the answers!  I will fake it as best I can.
+One of the frequently touted strong points of R is data visualization.  We saw some of that with our use of base graphics, but those plots were, frankly, a bit pedestrian.  More and more though, users are moving away from base graphics and using the`ggplot2` package.  I would even go as far to say that it is almost become the default plotting mechanism in R.  This whole lesson we will focus on creating, modifying, and saving plots with `ggplot2`. And full disclosure here, I am relatively new to `ggplot2` and have been using it to create plots for about a year, thus I likely don't have all the answers!  I will fake it as best I can.
 
 ##Quick Links to Exercises and R code
 - [Lesson 7 R Code](/introR/rmd_posts/2015-01-15-07-Visualize.R): All the code from this post in an R Script.
@@ -32,7 +32,7 @@ One of the frequently touted strong points of R is data visualization.  We saw s
 - Output plots to files
 - Know where to get some help
 
-A lot has been written and discussed about `ggplot2`.  In particular see [here](http://ggplot2.org/), [here](http://docs.ggplot2.org/current/) and [here](https://github.com/karthikram/ggplot-lecture).  The gist of all this, is that `ggplot2` is an implementation of something known as the "grammar of graphics."  This separates the basic components of a graphic into distinct parts (e.g. like the parts of speach in a sentence).  You add these parts together and get a figure.
+A lot has been written and discussed about `ggplot2`.  In particular see [here](http://ggplot2.org/), [here](http://docs.ggplot2.org/current/) and [here](https://github.com/karthikram/ggplot-lecture).  The gist of all this, is that `ggplot2` is an implementation of something known as the "grammar of graphics."  This separates the basic components of a graphic into distinct parts (e.g. like the parts of speech in a sentence).  You add these parts together and get a figure.
 
 Before we start developing some graphics, we need to do a bit of package maintenance as `ggplot2` is not installed by default.
 
@@ -52,9 +52,9 @@ iris_gg<-ggplot(iris,aes(x=Petal.Length,y=Petal.Width))
 
 Great, nothing happened...  All we did at this point is create an object that contains our data and what we want on the x and y axes.  We haven't said anything about what type of plot we want to make.  That comes next with the use of geometries.  
 
-So if we want to simply plot a points we can add it to the ggplot object.  These are known as the geometries.  
+So if we want to simply plot points we can add it to the ggplot object.  These are known as the geometries.  
 
-A side note on syntax.  You will notice that we add new "things" to a ggplot object by adding new functions.  In concept this is very similar to the piping we talked about early.  Essentially it takes the output from the first function as the input to the second.  So to add points and create the plot, we would do:
+A side note on syntax.  You will notice that we add new "things" to a ggplot object by adding new functions.  In concept this is very similar to the piping we talked about earlier.  Essentially it takes the output from the first function as the input to the second.  So to add points and create the plot, we would do:
 
 ```{r points_examp}
 #Different syntax than you are used to
@@ -88,7 +88,7 @@ iris_scatter<- iris_scatter +
 iris_scatter
 ```
 
-Much easier that using base.  Now `ggplot2` really shines when you want to add stats (regression lines, intervals, etc.). 
+Much easier than using base.  Now `ggplot2` really shines when you want to add stats (regression lines, intervals, etc.). 
 
 Lets add a loess line with 95% confidence intervals
 
@@ -108,7 +108,7 @@ iris_scatter_lm<-iris_scatter +
 iris_scatter_lm
 ```
 
-And if we are interest in the regressions by group we could do it this way.
+And if we are interested in the regressions by group we could do it this way.
 
 ```{r iris_lm_groups}
 iris_scatter_lm_group<-iris_scatter+
@@ -118,11 +118,11 @@ iris_scatter_lm_group
 
 ```
 
-You'll notice that I had to specify the `aes()` again, but for `geom_smooth()`.  We only specified the x and y in the original `ggplot` object, so if want to do something different in the subsequent functions we need to overwrite it for the function in which we want a different mapping (i.e. groups ).
+You'll notice that I had to specify the `aes()` again, but for `geom_smooth()`.  We only specified the x and y in the original `ggplot` object, so if want to do something different in the subsequent functions we need to overwrite it for the function in which we want a different mapping (i.e. groups).
 
-In short, while some of the intial setup for ggplot is a bit more verbose that base R, but when we want to do some more complex plots it is much easier in `ggplot2`.  
+In short, some of the initial setup for ggplot is a bit more verbose than base R, but when we want to do some more complex plots it is much easier in `ggplot2`.  
 
-Before we get into another exercise, lets look at some of the other geometries.  In particular, boxplots, historgrams, and bar charts.  If you want to see all that you can do, take a look at the list of `ggplot2` [geom functions](http://docs.ggplot2.org/0.9.3.1/index.html).
+Before we get into another exercise, lets look at some of the other geometries.  In particular, boxplots, histograms, and bar charts.  If you want to see all that you can do, take a look at the list of `ggplot2` [geom functions](http://docs.ggplot2.org/0.9.3.1/index.html).
 
 
 ###Boxplots
@@ -193,7 +193,7 @@ scatter_p_base
 
 Still not great, but it shows the basics.  You can build on this and edit EVERYTHING in the plot.  To get an idea of what you have access to, take a look at the help on `theme()` (e.g. `help("theme")`).
 
-There a few alterantive themese available by default (use `help("ggtheme")`) that save some time and typing.  Let's look at two.
+There are a few alternative themes available by default (use `help("ggtheme")`) that save some time and typing.  Let's look at two.
 
 ```{r themes_examp_stock}
 scatter_p + theme_bw()
@@ -227,6 +227,7 @@ A bit complicated for some of the custom stuff, but that is the price you have t
 #Many other options in the help
 ggsave(plot=scatter_polished,
        file="Fig1.jpg",dpi=600,width=8, heigh=5)
+#save as pdf
 ggsave(plot=scatter_polished,
        file="Fig1.pdf")
 ```
@@ -240,7 +241,7 @@ From Exercise 1 you should have a good start on a plot.  Let's tweak this some.
 1. Add a new section then:
 2. Change up the theme of your plot.  This is your plot, so experiment.  Experiment with fonts, colors, backgrounds, etc.  Remember that all of the things you can change are listed in the help (`help("theme")`).  Also the various `element_xxx()` functions will be needed, try `??element_` .
 2. If you have time, try to edit the colors of your points using `scale_colour_manual()`.
-3. When you get the plot to point where you are happy, save the plot to a file.  Use a dpi and file format of your liking.
+3. When you get the plot to a point where you are happy, save the plot to a file.  Use a dpi and file format of your liking.
 
 ##Cool stuff, help and examples
 In this last section we won't have an exercise, but I did want to show some other things that `ggplot2` can do and show some other functions that people have built on top of `ggplot2` that are pretty cool.  Lastly, I provide some links on more reading as well as some nice (and fun) data visualization galleries.
