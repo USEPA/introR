@@ -250,7 +250,7 @@ plot_nla<-function(x,y,out=NULL){
 
 
 ##Markdown
-Markdown isn't R, but it has become an important tool in the R ecosystem as it can be used to creat package vingettes, can be used on [GitHub](http://github.com), and forms the basis for several reproducible research tools in RStudio.  Markdown is a tool that allows you to write simply formated text that is converted to HTML/XHTML.  Primary goal of markdown is readibility of the raw file.  Over the last couple of years, Markdown has emerged as a key way to write up reproducible documents, create websites (this whole website was written in Mardown), and make presentations.  For the basics of markdown and general information look at [Daring Fireball](http://daringfireball.net/projects/markdown/basics).
+Markdown isn't R, but it has become an important tool in the R ecosystem as it can be used to create package vignettes, can be used on [GitHub](http://github.com), and forms the basis for several reproducible research tools in RStudio.  Markdown is a tool that allows you to write simply formatted text that is converted to HTML/XHTML.  The primary goal of markdown is readibility of the raw file.  Over the last couple of years, Markdown has emerged as a key way to write up reproducible documents, create websites (this whole website was written in Markdown), and make presentations.  For the basics of markdown and general information look at [Daring Fireball](http://daringfireball.net/projects/markdown/basics).
 
 *note: this text borrowed liberally from another class [SciComp2014](http://scicomp2014.edc.uri.edu)*
 
@@ -291,7 +291,7 @@ Lists can be done many ways in markdown. An unordered list is simply done with a
     
 Notice the space after the `-`.  
 
-To create an ordered list, simple use numbers.  So to produce:
+To create an ordered list, simply use numbers.  So to produce:
 
 1. this list
 2. is produced with
@@ -328,7 +328,7 @@ The only difference is the use of the `!` at the beginning.  When parsed, the im
 ##Reproducible Documents and Presentations
 By itself Markdown is pretty cool, but doesn't really provide any value added to the way most of us already work.  However, when you add in a few other things, it, in my opinion, changes things dramatically.  Two tools in particular that, along with Markdown, have moved reproducible research forward (especially as it relates to R) are, the `knitr` package and a tool called pandoc.  We are not going to cover the details of these, but we will use them via RStudio.  
 
-In short, these three tools allow us to write up documents, embed code via "code chunks", run that code and render the final document with nicely formatted text, results, figures etc into a final format of our choosing.  We can create `.html`, `.docx`, `.pdf`, ...  The benefit of doing this is that all of our data and code are a part of the document.  I share me source document, then anyone can reproduce all of our calculations.  For instance, I can make a manuscript that looks like this:
+In short, these three tools allow us to write up documents, embed code via "code chunks", run that code and render the final document with nicely formatted text, results, figures etc into a final format of our choosing.  We can create `.html`, `.docx`, `.pdf`, ...  The benefit of doing this is that all of our data and code are a part of the document.  I share my source document, then anyone can reproduce all of our calculations.  For instance, I can make a manuscript that looks like this:
 
 [![Rendered Manuscript](/introR/figure/rendered.jpg)](/introR/figure/manuscript.pdf)
 
@@ -353,7 +353,7 @@ This identifies what is known as a code chunk.  When written like it is above, i
     x<-rnorm(100)
     ```
 
-Alternatively, you might just want the output returned, as would be the case when using R Markdown to produce a figure in a presenation or paper:
+Alternatively, you might just want the output returned, as would be the case when using R Markdown to produce a figure in a presentation or paper:
 
 
     ```{r echo=FALSE}`r ''`
@@ -394,11 +394,11 @@ If you look near the top of the editor window you will see:
 
 Click this and behold the magic!
 
-Spend some time playing around with this document.  Add in some other markdown, text and a code chunk then `knit()` it to see the outcome.  It should be easy to see how this could be used to write the text describing and anlysis, embed the analysis and figure creation directly in the document, and render a final document.  You share the source and rendered document and the anyone has access to your full record of that research!
+Spend some time playing around with this document.  Add in some other markdown, text and a code chunk then `knit()` it to see the outcome.  It should be easy to see how this could be used to write the text describing an analysis, embed the analysis and figure creation directly in the document, and render a final document.  You share the source and rendered document and anyone has access to your full record of that research!
 
 ###Create a Presentation
 Creating a presentation is not much different.  We just need a way to specify different slides.
 
-Repeat the steps from above, but this time instead of selecting "Document", select "Presentation".  Only thing we need to know is that a second level header (i.e. `##`) is what specifies the title of the next slide.  Any thing you put after that goes on that slide.  Similar to before, play around with this add a slide with some new text, new code and knit it.  There you have it, a reproducible presentation.  
+Repeat the steps from above, but this time instead of selecting "Document", select "Presentation".  Only thing we need to know is that a second level header (i.e. `##`) is what specifies the title of the next slide.  Any thing you put after that goes on that slide.  Similar to before, play around with this, add a slide with some new text, new code and knit it.  There you have it, a reproducible presentation.  
 
-I know you will probably wonder can you change the look and feel of this presentation, and the answer is yes.  I have done that, but using a different method for creaing slides by using the `slidify` package.  An example of that presentation is in a talk I gave on [Social Media and Blogging](http://jwhollister.com/epablogpresent).  It does take a bit more work to set this up.  I am also not familar with where RStudio is getting the styling for the presentation. In short, yes but requires a bit of work.
+I know you will probably wonder can you change the look and feel of this presentation, and the answer is yes.  I have done that, but using a different method for creating slides by using the `slidify` package.  An example of that presentation is in a talk I gave on [Social Media and Blogging](http://jwhollister.com/epablogpresent).  It does take a bit more work to set this up.  I am also not familar with where RStudio is getting the styling for the presentation. In short, yes but requires a bit of work.
